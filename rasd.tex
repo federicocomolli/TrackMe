@@ -1,17 +1,33 @@
 \documentclass{report}
 \usepackage[utf8]{inputenc}
 
+\showboxdepth=\maxdimen
+\showboxbreadth=\maxdimen
+
 \title{TrackMe}
 \author{Federico Comolli
         \and
         Francesco Corda}
 \date{October 2018}
 
-\usepackage{natbib}
 \usepackage{graphicx}
+\usepackage[nottoc,numbib]{tocbibind}
 \renewcommand{\chaptername}{Section \value}
+\renewcommand\bibname{References}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{enumitem}
 
 \begin{document}
+
 \begin{titlepage}
 	\centering
 	\includegraphics[width=150pt]{images/polimi_logo}\par\vspace{1cm}
@@ -30,12 +46,13 @@
 	\vspace{2cm}
 	{\Large
 		Comolli Federico, 920258\\
-		Corda Francesco, 920912\par}
+	    Corda Francesco, 920912\par}
 	\vfill
 	Referent professor: Di Nitto Elisabetta\par
 	\vfill
 	{\large\today\par}
 \end{titlepage}
+
 \renewcommand{\contentsname}{Table of Contents}
 \tableofcontents
 
@@ -47,14 +64,16 @@
 \input{chapters/Overall_Description.tex}
 
 \chapter{Specific Requirements}
+\cite{adams1995hitchhiker}
 \input{chapters/Specific_Requirements.tex}
 
 \chapter{Formal Analysis Using Alloy}
 \input{chapters/Formal_Analysis_Using_Alloy.tex}
 
-\chapter{Effort Spent \cite{adams1995hitchhiker}}
+\chapter{Effort Spent}
 \input{chapters/Effort_Spent.tex} 
 
 \bibliographystyle{plain}
 \bibliography{references}
+
 \end{document}

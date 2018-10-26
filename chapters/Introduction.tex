@@ -1,39 +1,66 @@
-\section{Introduction}
-\subsection{Purpose}
-\subsection{Scope}
-\subsubsection{Description of the given problem}
-\subsubsection{Goals}
+\section{Purpose}
+TrackMe is a company that wants to create a software-based system that allow third parties to monitor the location and health status of individuals. 
+\par This service, which from now on will be referred to as Data4Help, supports the registration of individuals who, by registering, agree to the collection of their data. Data acquisition can occur through smart watches or similar electronic devices.
+\par Third parties can request access to the data of some specific individuals of which they know a form of identification (such as the SSN or the Fiscal Code). In this case, TrackMe forwards the request to the user who can accept or refuse it.
+\par Another service offered to third parties by Data4Help is to access to anonymous data of classes of individuals, grouped by different criteria (for example geographical area, age, sex, etc.). Anonymity is a crucial value for TrackMe, so it approves these requests only if third parties cannot go back to users' identity; for this reason requests referred to groups composed by less than 1000 individuals will be denied.
+\par After a request has been accepted, third parties can subscribe to the reception of updated data as soon as they are produced.
+\par Moreover, in order to exploit the features offered by Data4Help, TrackMe wants to develop a customized SOS service to elderly people. This system, called AutomatedSOS, uses the data collected by Data4Help to monitor the health status of the subscribed customers. Through the real time screening the system is able to react to the variation of the parameters by sending an ambulance to the location of the customer in case of emergency.
+
+\pagebreak
+\subsection{Goals}
 
 Data4Help:  
-\begin{itemize}
-    \item [(G1)] Monitor the location of users through electronic devices.
-    \item [(G2)] Monitor the health status of users through electronic devices.
-    \item [(G3)] Allowing third parties to access to users' data.
-    \begin{itemize}
-        \item [(G3.1)] Access to data of some specific person by providing SSN or Fiscal Code.
-        \item [(G3.2)] Access to anonymized data of group of people.
-    \end{itemize}
-    \item [(G4)] Allow third parties to subscribe to new data and to receive them as soon as they are produced.
-    
-   
-\end{itemize}  
+\begin{enumerate}[label={[G\arabic*]}]
+    \item Allow a visitor to become registered user after providing credentials.
+    \item Monitor the location of users through electronic devices.
+    \item Monitor the health status of users through electronic devices.
+    \item Allow a user to accept or refuse a request to access to personal data.
+    \item Allow third parties to register to the system.
+    \item Allow third parties to request an access to users' data.
+    \begin{enumerate} % [label*={.\arabic*}]
+        \item [{[G6.1]}] Allow third parties to request access to data of some specific individuals by providing SSN or Fiscal Code.
+        \item [{[G6.2]}] Allow third parties to request access to anonymized data of group of people.
+    \end{enumerate}
+    \item Accept request for data of group of people only if the system can guarantee the anonymity of the people.
+    \item Allow third parties to subscribe to new data and to receive them as soon as they are produced.
+\end{enumerate}  
 \noindent
 AutomatedSOS:
+\begin{enumerate}[resume, label={[G\arabic*]}]
+    \item Allow a visitor to become registered user after providing credentials.
+    \item Monitor the location of users through electronic devices.
+    \item Monitor the health status of users through electronic devices.
+    \item Send to the location of the customer very quickly an ambulance when such parameters are below certain thresholds. 
+\end{enumerate}
+
+\section{Scope}
+\subsection{Description of the given problem}
+
+\section{Definitions, Acronyms, Abbreviations}
+\subsection{Definitions}
 \begin{itemize}
-    \item [(G1)] Send to the location of the customer very quickly an ambulance when such parameters are below certain thresholds. 
-    \item [G2] 
+    \item emergency: it occurs when the parameters are below a defined threshold. 
 \end{itemize}
 
-\subsection{Definitions, Acronyms, Abbreviations}
-\subsubsection{Definitions}
-\subsubsection{Acronyms}
+\subsection{Acronyms}
 \begin{itemize}
-    \item RASD - Requirement Analysis and Specification Document 
-    \item SSN - Social Security Number
+    \item RASD: Requirement Analysis and Specification Document 
+    \item SSN: Social Security Number
 \end{itemize}
-\subsubsection{Abbreviation}
+\subsection{Abbreviation}
+\begin{itemize}
+    \item credentials: user name, password, SSN or Fiscal Code
+\end{itemize}
+\section{Revision history}
+\section{Reference Documents}
 
-\subsection{Revision history}
-\subsection{Reference Documents}
-\subsection{Document Structure}
-
+\section{Document Structure} %bozza di esempio, da riscrivere
+\begin{itemize}
+    \item Section 1 gives an introduction to the problem and describes the purpose of the applications Data4Help and Automated SOS and states their goals. The scope of the two applications is defined.
+    \item Section 2 presents the overall description of the project. The product perspective includes details on the shared phenomena and the domain models. The class diagram describes the domain model used,and the state diagram analyzes the process of arranging a meeting and reaching it in time. Here the majority of functions of the system are more precisely specified, with respect to the already mentioned goals of the system. In the user characteristics section the types of actors that can use the application are described.
+    \item Section 3 contains the external interface requirements, including: user interfaces, hardware interfaces, software interfaces and communication interfaces. Few scenarios describing specific situations are listed here. Furthermore, the functional requirements are defined by using use case and sequence diagram.
+    The non-functional requirements are defined through performance requirements, design constraints and software system attributes.
+    \item Section 4 includes the alloy model and the discussion of its purpose. Also, a world generated by it is shown.
+    \item Section 5 shows the effort spent by each group member while working on this project.
+    \item Section 6 includes the reference documents.
+\end{itemize}
