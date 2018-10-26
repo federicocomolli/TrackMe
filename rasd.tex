@@ -1,0 +1,60 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+
+\title{TrackMe}
+\author{Federico Comolli
+        \and
+        Francesco Corda}
+\date{October 2018}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\renewcommand{\chaptername}{Section \value}
+
+\begin{document}
+\begin{titlepage}
+	\centering
+	\includegraphics[width=150pt]{images/polimi_logo}\par\vspace{1cm}
+	{\scshape\LARGE
+		Politecnico di Milano\par}
+	\vspace{1cm}
+	{\scshape\Large
+		Software Engineering 2 Project\\
+		a.y. 2018-19\par}
+	\vspace{1.5cm}
+	{\huge\bfseries
+		Data4Help, AutomatedSOS\\\par}
+	{\Large\bfseries
+		Requirements Analysis and Specifications Document\par}
+	Version 1.0\par
+	\vspace{2cm}
+	{\Large
+		Comolli Federico, 920258\\
+		Corda Francesco, 920912\par}
+	\vfill
+	Referent professor: Di Nitto Elisabetta\par
+	\vfill
+	{\large\today\par}
+\end{titlepage}
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+
+
+\chapter{Introduction}
+\input{chapters/Introduction.tex}
+
+\chapter{Overall Description}
+\input{chapters/Overall_Description.tex}
+
+\chapter{Specific Requirements}
+\input{chapters/Specific_Requirements.tex}
+
+\chapter{Formal Analysis Using Alloy}
+\input{chapters/Formal_Analysis_Using_Alloy.tex}
+
+\chapter{Effort Spent \cite{adams1995hitchhiker}}
+\input{chapters/Effort_Spent.tex} 
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
