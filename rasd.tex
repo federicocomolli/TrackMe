@@ -1,18 +1,26 @@
 \documentclass{report}
 \usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\chaptername}{Section}
+\renewcommand{\chaptermark}[1]{
+\markboth{\chaptername
+\ \thechapter . \ #1}{}}
+\lhead{\slshape\leftmark}
+\lfoot{F. Comolli, F. Corda}
+\rfoot{RASD v1.0}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 
-\showboxdepth=\maxdimen
-\showboxbreadth=\maxdimen
-
-\title{TrackMe}
 \author{Federico Comolli
         \and
         Francesco Corda}
 \date{October 2018}
 
+
 \usepackage{graphicx}
 \usepackage[nottoc,numbib]{tocbibind}
-\renewcommand{\chaptername}{Section \value}
 \renewcommand\bibname{References}
 
 \usepackage{hyperref}
@@ -53,18 +61,18 @@
 	{\large\today\par}
 \end{titlepage}
 
+
 \renewcommand{\contentsname}{Table of Contents}
 \tableofcontents
 
 
-\chapter{Introduction}
+c\chapter{Introduction}
 \input{chapters/Introduction.tex}
 
 \chapter{Overall Description}
 \input{chapters/Overall_Description.tex}
 
 \chapter{Specific Requirements}
-\cite{adams1995hitchhiker}
 \input{chapters/Specific_Requirements.tex}
 
 \chapter{Formal Analysis Using Alloy}

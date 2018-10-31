@@ -2,3 +2,27 @@
 \section{Product functions}
 \section{User characteristics}
 \section{Assumptions, dependencies and constraints}
+\subsection{Domain Assumptions}
+Data4Help:  
+\begin{enumerate} [label={[D\arabic*]}]
+    \item Users insert credentials that correspond to their identity.
+    \item When a new registered user sends his/her credentials to the system, the message will be surely received.
+    \item The communication channel doesn't corrupt the data sent by the user's device to the system and vice versa.
+    \item Users locations are retrieved by GPS.
+    \item The electronic device on which the system is installed is equipped with the sensors related to the parameters tracked by Data4Help.
+    \item The system retrieves the data from the sensors through the interfaces available on the electronic device.
+    \item Position information provided by GPS is sufficiently accurate\cite{gps}.
+    \item The sensors related to the health status collect the data with a reasonable precision.
+    \item It's sufficient that the number of people involved in a group query is greater than 1000 people to ensure the users' privacy.
+    \item 
+\end{enumerate}  
+\noindent
+AutomatedSOS:
+\begin{enumerate} [resume, label={[D\arabic*]}]
+    \item Data provided by Data4Help API are surely received and they are not corrupted.
+    \item When an emergency request is sent to National Health Service, it surely receive it.
+    \item When National Health Service receives an emergency request, at least an ambulance is available.
+    \item When parameters are below certain thresholds, it means that the user actually needs first aid.
+    \item Operations Center of the NHS is up 24/7.
+    \item When Operations Center gather a request from AutomatedSOS, it sends at least an ambulance and at least one of them arrives to the location of the emergency.
+\end{enumerate}
