@@ -16,13 +16,19 @@ Data4Help:
         \begin{itemize}
             \item [{[D1]}] Users insert credentials that correspond to their identity.
             \item [{[D2]}] When a new registered user sends his/her credentials to the system, the message will be surely received.
+            \item [{[R1]}] The system should provide a registration form offering the following mandatory fields: name, surname, SSN or Fiscal Code.
+            \item [{[R2]}] The system must guarantee that the credentials are unique.
         \end{itemize}
         
     \item Monitor the location of users through electronic devices.
         \begin{itemize}
             \item [{[D3]}] The communication channel doesn't corrupt the data sent by the user's device to the system and vice versa.
-            \item [{[D4]}] Users locations are retrieved by GPS.
+            \item [{[D4]}] The electronic device on which the system is installed is equipped with the GPS sensor.
+            \item [{[D6]}] The  system  retrieves  the  data  from  the  sensors(*)  through  the  interfaces available on the electronic device.
             \item [{[D7]}] Position information provided by GPS is sufficiently accurate.
+            \item [{[R3]}] The system must acquire real-time users' positions from the GPS installed on the user's device.
+            \item [{[R4]}] The system must collect users' data in specific databases.
+            \item 
         \end{itemize}
         
     \item Monitor the health status of users through electronic devices.
@@ -31,28 +37,51 @@ Data4Help:
             \item [{[D5]}] The electronic device on which the system is installed is equipped with the sensors related to the parameters tracked by Data4Help.
             \item [{[D6]}] The  system  retrieves  the  data  from  the  sensors  through  the  interfaces available on the electronic device.
             \item [{[D8]}] The sensors related to the health status collect the data with a reasonable precision.
+            \item [{[R5]}] The system must acquire real-time users' health parameters from the sensors installed on the user's device.
+            \item [{[R4]}] The system must collect users' data in specific databases.
         \end{itemize}
         
     \item Allow a user to accept or refuse a request to access to personal data.
-    
+    \begin{itemize}
+            \item [{[R6]}] Every time that a third party inserts a request for data relative a SSN or Fiscal Code, the system must ask authorizations to the user corresponding to those credentials.
+            \item [{[R7]}] The system must provide a function to allow users to accept or refuse a request for personal data.
+        \end{itemize}
+
     \item Allow third parties to register to the system.
         \begin{itemize}
             \item [{[D1]}] Users insert credentials that correspond to their identity.
             \item [{[D1]}] When a new registered user sends his/her credentials to the system, the message will be surely received.
+            \item [{[R8]}] The system should provide a registration form to third parties.
+            \item [{[R2]}] The system must guarantee that the credentials are unique.
         \end{itemize}
         
     \item Allow third parties to request an access to users' data.
     \begin{enumerate} [label*={.\arabic*}]
         \item [{[G6.1]}] Allow third parties to request access to data of some specific individuals by providing SSN or Fiscal Code.
+            \begin{itemize}
+                \item [{[R*]}] The system must provide third parties with a request form to request the access to an individual's data offering the mandatory fields of SSN or Fiscal Code. (da finire)
+            \end{itemize}
         \item [{[G6.2]}] Allow third parties to request access to anonymized data of group of people.
+            \begin{itemize}
+                \item [{[R*]}] The system must provide a function to allow third parties to request the access to data of a group of people offering some selection criteria such as geographical, time, health parameters, movement habits, ecc.
+            \end{itemize}
     \end{enumerate}
+    
+    \item Allow third parties to receive users' data (goal mancante, non mi piace come è scritto).
     
     \item Accept request for data of group of people only if the system can guarantee the anonymity of the people.
         \begin{itemize}
             \item [{[D9]}] It’s sufficient that the number of people involved in a group query is greater than 1000 people to ensure the users’ privacy.
+            \item [{[R*]}] The system accepts a request for anonymous data only if the group composing the data is formed by more than 1000 people.
         \end{itemize}
         
     \item Allow third parties to subscribe to new data and to receive them as soon as they are produced.
+        \begin{itemize}
+            \item [{[R3]}] The system must acquire real-time users' positions from the GPS installed on the user's device.
+            \item [{[R5]}] The system must acquire real-time users' health parameters from the sensors installed on the user's device.
+            \item [{[R*]}] The system must provide a function to allow third parties to subscribe to updated users' data.
+            \item [{[R*]}] The system must forward in real-time the most recent data to the third parties that subscribed to them.
+        \end{itemize}
 \end{enumerate}  
 \noindent
 AutomatedSOS:
@@ -66,7 +95,7 @@ AutomatedSOS:
     \item Monitor the location of users through electronic devices.
         \begin{itemize}
             \item [{[D3]}] The communication channel doesn't corrupt the data sent by the user's device to the system and vice versa.
-            \item [{[D4]}] Users locations are retrieved by GPS.
+            \item [{[D4]}] The electronic device on which the system is installed is equipped with the GPS sensor.
             \item [{[D7]}] Position information provided by GPS is sufficiently accurate.
             \item [{[D11]}] Data  provided  by  Data4Help  API  are  surely  received  and  they  are  not corrupted.
         \end{itemize}
