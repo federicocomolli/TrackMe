@@ -6,8 +6,11 @@
 \par
 \par
 \subsection{Hardware Interfaces}
+Data4Help and AutomatedSOS are not designed to offer hardware interfaces to interact with external services.
 \subsection{Software Interfaces}
+Data4Help will offer an API to let third parties access to users' data.(ampliare)
 \subsection{Communication Interfaces}
+AutomatedSOS will offer an API that will connects with the NHS system to perform a reliable emergency communication.(ampliare)
 
 \section{Scenarios}
     \subsection{Scenario 1}
@@ -202,15 +205,69 @@ AutomatedSOS:
 
 
 \section{Performance Requirements}
+The system has to be able to respond to a huge number of transactions simultaneously.The service should be able to adapt depending on the number of active users. 
+Speed and performance are critical especially for AutomatedSOS service, since it must guarantee to contact the Operations Center within 5 seconds from the time an anomaly is detected.
 
 \section{Design Constraints}
 \subsection{Standards compliance}
+    \begin{itemize}
+        \item Health parameters are stored according the international units of measure.
+        \item Position is stored according geographic coordinates system.
+        \item SSN or Fiscal Code format changes according to the country of usage.
+        \item *
+    \end{itemize}
+
 \subsection{Hardware limitations}
+\begin{itemize}
+\item Mobile App
+    \begin{itemize}
+        \item Apple or Android smartphone
+        \item Apple, Android, Fitbit or Garmin wearables
+        \item 3G/4G/WiFi connection
+        \item Bluetooth
+        \item GPS
+        \item Heart rate, temperature, blood glucose level, accelerometer sensors
+    \end{itemize}
+\item Web App
+    \begin{itemize}
+        \item Devices that supports modern browsers such as Google Chrome, Mozilla Firefox, Microsoft Edge, Apple Safari, etc.
+    \end{itemize}
+\end{itemize}
 \subsection{Any other constraint}
+
+\subsubsection{Regulatory Policies}
+The system will be subject to the privacy requirements enforced by the national law. In order to respect the minimum constraints, the system will ask for users' permission to store their data and to let third parties access to their personal informations.
+
+\subsubsection{Interfaces}
+    Sensors interact with Data4Help through an apposite API (healthKit for iOS\cite{healthKit}, Sensors API for Android\cite{sensorsAPI}).
+    AutomatedSOS interacts with the Operations Center through an interface provided by the NHS.
+    Data4Help use Google Maps API to show the position of a user on a mobile or web app.
+    Google Maps API is also used to transform a position on a map into an address while composing a group request.
+
+\subsubsection{Level of Criticality}
+Since an unexpected fault in Data4Help acquisition could implies very important consequences on the safeness of AutomatedSOS users, it is critical that the system is almost always available.
+
+\subsubsection {Parallel operations}
+The system has to support multiple concurrent requests. Individual data may be accessed concurrently by more than one third party. Also Data4Help will be able to record data from many different users at the same time.
 
 \section{Software System Attributes}
 \subsection{Reliability}
+The system should offer a level of reliability such that core functions crash-down occur rarely and can promptly be restored.
+The application should aim to a 24/7 reliability, of course small variations from the ideal case are tolerable. 
+
 \subsection{Availability}
+The system is required to have an availability of 99.99\%, meaning that the maximum downtime accepted every year is of 1 hour. To ensure this requirement the system will have to be implemented with redundancy of data in order to overcome potential malfunctioning.
+
 \subsection{Security}
+It is important to ensure that the system is adequately protected against attacks to ensure the privacy and the safety of the users.
+The system must guarantee that only authorized third parties are able to access individuals data and that only the system managers can update the internal functionalities.
+All the users' data should be encrypted both during the client-server communication and on the server database.
+The data center should also be protected against natural disasters such as fire or floods. 
+
 \subsection{Maintainability}
+The system should be easy to maintain and update. Services such as Data4Help and AutomatedSOS could need in the future some improvement in their functionalities (such as the addiction of a new revolutionary sensor for Data4Help or the changes in the thresholds in AutomatesSOS), so it's crucial that they are designed in a flexible way.
+In order to observe this constraint, the system will be implemented following the most common software engineering best practices and will be detailed with a complete and specific documentation.
+
 \subsection{Portability}
+To ensure the portability of the core service, the database and the back-end system will be implemented avoiding platform dependent programming languages.
+Also the web client applications will be designed following the W3C standards, in order to ensure a correct rendering of the page in all major browsers.
