@@ -1,0 +1,118 @@
+\section{Functional Requirements}
+The design decisions illustrated in this document have been taken with the purpose to satisfy all the functional requirements listed in the RASD document. In this section, each requirement is mapped into the corresponding design components.
+The mapping can be better understood by observing the \hyperlink{RV}{\underline{Runtime view, section 2.5}}, in which is illustrated the sequential order of the interaction between each design component, in order to accomplish the functional requirements.\\
+Other important diagrams that integrate the following mapping, are in the\\ \hyperlink{CV}{\underline{Component view, section 2.3}}.
+
+\begin{enumerate} [label={\bf[R\arabic*]}]
+    \item \textbf{The system should provide a registration form offering the following mandatory fields: name, surname, SSN or Fiscal Code.}
+        \begin{itemize}
+            \item Mobile application
+            \item User services: Login service
+            \item Account manager
+        \end{itemize}
+    \item \textbf{The system must guarantee that the credentials are unique.}
+        \begin{itemize}
+            \item Account manager
+        \end{itemize}
+    \item \textbf{The system must acquire real-time users' positions from the GPS installed on the user's device.}
+        \begin{itemize}
+            \item GPS API
+            \item User services: Data acquisition service
+            \item User services: Data sending service
+            \item Central controller: Data gathering
+        \end{itemize}
+    \clearpage
+    \item \textbf{The system must collect users' data in specific databases.}
+        \begin{itemize}
+            \item Central controller: Data provider
+            \item Data manager
+            \item DBMS
+        \end{itemize}
+    \item \textbf{The system must acquire real-time users' health parameters from the sensors installed on the user's device.}
+        \begin{itemize}
+            \item sensors API
+            \item User services: Data acquisition service
+            \item User services: Data sending service
+            \item Central controller: Data gathering
+        \end{itemize}
+    \item \textbf{Every time that a third party inserts a request for data relative to a Fiscal Code, the system must ask the authorization to the corresponding user.}
+        \begin{itemize}
+            \item User services: Request manager
+            \item Mobile application
+        \end{itemize}
+    \item \textbf{The system must provide a function to allow users to accept or refuse a request for personal data.}
+        \begin{itemize}
+            \item Mobile application
+            \item User services: Requests manager
+        \end{itemize}
+    \item \textbf{The system should provide a registration form to third parties.}
+        \begin{itemize}
+            \item Web application
+            \item Mobile application
+            \item Third party services: Registration service
+        \end{itemize}
+    \item \textbf{The system must provide a function to allow third parties to request the access to individuals data. The form must require the filling of the SSN or Fiscal Code of the corresponding user.}
+        \begin{itemize}
+            \item Web application
+            \item Mobile application
+            \item Third party services: Individual request service
+            \item Account manager
+            \item Central controller: Individual request manager
+            \item User services: Requests manager
+        \end{itemize}
+    \item \textbf{The system must provide a function to allow third parties to request the access to data of a group of people. The form must offer some selection criteria such as geographical, time, health parameters, movement habits, ecc.}
+        \begin{itemize}
+            \item Web application
+            \item Mobile application
+            \item Third party services: Group request service
+            \item Account manager
+            \item Central controller: Group request manager
+        \end{itemize}
+    \item \textbf{As soon as a request has been approved, the system must forward the most recent data to the third party applying for them.}
+        \begin{itemize}
+            \item Web application
+            \item Mobile application
+            \item Third party services: Individual request service
+            \item Third party services: Group request service
+            \item Third party services: Access to data
+            \item Central controller: Data provider
+            \item Central controller: Data gathering
+            \item Data Manager
+            \item DBMS
+        \end{itemize}
+    \item \textbf{Data4Help must provide a function to let third parties download the received data.}
+        \begin{itemize}
+            \item Web application
+            \item Mobile application
+        \end{itemize}
+    \item \textbf{The system accepts a request for anonymous data only if the group composing the data is formed by more than 1000 people.}
+        \begin{itemize}
+            \item Central controller: Group request manager
+        \end{itemize}
+    \item \textbf{The system must provide a function that allows to customize the requests for subscription to updated data. The requests must include how long the permission is still valid.}
+        \begin{itemize}
+            \item Mobile application
+            \item Web application
+            \item Third party services: Individual request service
+            \item Third party services: Group request service
+        \end{itemize}
+    \item \textbf{The system must provide a function to the corresponding user that allows him/her to accept or refuse the subscription request.}
+        \begin{itemize}
+            \item User services: Request manager
+            \item Mobile application
+        \end{itemize}
+    \item \textbf{The system must forward in real-time the most recent data to the third parties that subscribed to them.}   
+        \begin{itemize}
+            \item Web application
+            \item Mobile application
+            \item Third party services: Individual request service
+            \item Third party services: Group request service
+            \item Third party services: Access to data
+            \item Central controller: Data provider
+            \item Central controller: Data gathering
+            \item Data Manager
+            \item DBMS
+        \end{itemize}
+\end{enumerate}
+
+\section{Non Functional Requirements}
