@@ -36,6 +36,7 @@ A more detailed description of each component will be given in the next section.
     \centering
     \includegraphics[width=300pt]{images/High-Level_Components.jpg}
     \caption{High Level Components.}
+    \label{HLC}
 \end{figure}
 \clearpage
 
@@ -267,7 +268,7 @@ The emergency service provide the methods to collect(AGGIUNGERE AL DIAGRAMMA) an
 \begin{itemize}
     \item \textbf{Model-View-Controller:} it's a very common design pattern, that separates the architecture into three communicating components. The Controller acts performs actions on the Model, using inputs from the View. The Model contains the application's data structures and the View gives an external representation of them.\\ 
     Using the MVC pattern promotes the code reuse and avoid the coupling between the data and their representation. This pattern is particularly appropriate for complex systems such as Data4Help and AutomatedSOS, that will be deployed in multiple physical nodes and will provide several types of views to their users.  
-    \item \textbf{Service Oriented Architecture:} we designed the system's components as a set of services that connects with each other through a communication protocol. Viewing each component as a service gives the advantages of abstracting its functions to the highest level and see the module as a independent black box.\\
+    \item \textbf{\hypertarget{SOA_TG}{Service Oriented Architecture:}} we designed the system's components as a set of services that connects with each other through a communication protocol. Viewing each component as a service gives the advantages of abstracting its functions to the highest level and see the module as a independent black box.\\
     A SOA enhances the modularity and maintainability of the system. It also promotes the creation of robust and complete interfaces for each component.
     \item \textbf{Proxy Pattern and Facade Pattern:} we used these patterns mainly for the interactions between the back-end and the client applications. The proxy pattern provides an intermediate object that substitute for the real subject of a communication, while controlling that the input is valid and the access is appropriate. The facade pattern implements a simple interfaces for the access of the back-end system and also acts as an adapter for the information exchanges in the messages. We use these patterns to create an interface between clients and the central system that could be simple to access, secure and that could minimize the dependencies between modules.
     \item \textbf{Publish/Subscribe Pattern:} it is closely related to the MVC pattern. This architectural style offers great scalability and it's fundamental to ensure satisfying performances in an event-based system. Using this pattern will consent to send users' data as soon as they are collected and to notify an emergency as soon as it's detected. 
@@ -287,8 +288,8 @@ The emergency service provide the methods to collect(AGGIUNGERE AL DIAGRAMMA) an
     AutomatedSOS core module (\hyperlink{ES}{ \underline{Emergency Service}}) exploits Data4Help's Data Provider to obtain users' data in real time.
     Placing the two system's logic in distinct logic modules favors a distributed deployment of the back-end and a correct load balance.
     In terms of reliability, a failure in AutomatedSOS does not affect Data4Help operations (the vice versa is not true, for obvious reasons).
-    \item \textbf{Interaction with the NHS:} AutomatedSOS will be hopefully adopted in several countries, that have significantly different National Health Institutions, First Aid services and unit of measurement for the health parameters.\\
-    An efficient integration between the system and the local NHS is the fundamental requirement for the success of an application that deals with its users' lives.\\
+    \item \hypertarget{NHS_API}{\textbf{Interaction with the NHS:}} AutomatedSOS will be hopefully adopted in several countries, that have significantly different National Health Institutions, First Aid services and unit of measurement for the health parameters.\\
+    An efficient integration between the system and the local NHS is a fundamental requirement for the success of an application that deals with its users' lives.\\
     The existence of many differences between the countries forces the design to be adapted to each specific NHS. In order to do so, the NHS Adapter is the interface component responsible for the translation between the system and the local Operations Center.
     To give an high-level description: if a country offers an API to send a digital message to the Operations Center, the NHS Adapter will connect to it; if such an API does not exists, the NHS adapter will call 911 telephone number and read the emergency message to the operator with an artificial voice.
     (CAMBIARE DIAGRAMMI)

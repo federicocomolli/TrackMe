@@ -49,7 +49,119 @@ For these reasons, application components are not considered \say{risky} and the
 
 \clearpage
 \section{Integration and Testing}
- \subsection{Entry Criteria}
+\subsection{Entry Criteria}
+Integration testing is an important process that has to start as soon as every component is almost complete, so that is possible to promptly fix any flaw that will eventually occur. \\
+The purpose of this process is to test the integration between the components of our system, according to all the functionalities listed in the RASD and the DD documents that our application will be able to offer. \\
+To start the Integration each component has to correctly pass its unit test.
+All the services provided by external entities, including each APIs (Google maps API and the API of the health sensors), have to be completed and they have to properly work since our system will strictly depends on them. For the same reason, also the DBMS and the Data Manager service must be completed before starting all tests. \\
+Regarding the AutomatedSOS system-to-be, we have already explained how the interaction between the system and the National Health Services can change according the host country. In the nations in which the NHS provides an API, the latter must be completed before starting the integration tests. Otherwise, there must be an operative VoIP API that allows AutomatedSOS to interact with the NHS.\\ \\
+The integration process between two components should start when both of them have reached a minimum level of completion, in order to make the integration tests meaningful.\\
+To be detailed, the estimated completion of each component to enter the integration process should be:
+\begin{itemize}
+    \item Data Manager, \textbf{100\% of completion}
+    \item Central Controller, \textbf{90\% of completion}
+    \item Account Manager, \textbf{70\% of completion}
+    \item Third Party Services, \textbf{60\% of completion}
+    \item User Service, \textbf{60\% of completion}
+    \item Emergency Services, \textbf{80\% of completion}
+    \item Third Party Client Applications, \textbf{40\% of completion}
+    \item User Client Applications, \textbf{40\% of completion}
+\end{itemize}
+In the bulleted list above, the percentages reflect the minimum number of functions that each component must offer in order to enter the integration process.
+\clearpage
+
 \subsection{Elements to be Integrated}
+As already mentioned in the \hyperlink{SOA_TG}{\underline{Architectural Patterns section}}, the system is based on the Service Oriented pattern which guarantees the modularity and the maintainability of the software. Each component offers some interfaces in order to communicate with the others.
+It's important to test the integration of each components to ensure the reliability of the system. \\
+Moreover, each requirement listed in the RASD document is achieved thanks to the complex interactions between the interfaces of all the components.\\
+We identify four different macro-categories in which components can be grouped, according to their role inside the system.
+Referring to the high-level components in the Figure \underline{\ref{HLC}}, we can divide them into:
+\begin{itemize}
+    \item Client components: third party web application, user mobile application, user wearable application.
+    \item Server components: Third party services, user services, account manager, central controller, emergency services.
+    \item Data components:  data manager, DBMS.
+    \item External components: Maps API, VoIP API, Sensors API.
+\end{itemize}
+This separation facilitates us in the process of the integration. 
+The Server category compose the core logic of the application, so the majority of the interactions takes place inside this category.
+On the contrary, there aren't interactions between the components inside the Client categories.\\
+In the following lines we list all the elements that need to be integrated together, belonging to the same or different categories.\\ \\
+\textbf{Integration of Server Components with Data and External components:}
+\begin{itemize}
+    \item Central Controller
+    \begin{itemize}
+        \item Data Provider, Data Manager
+        \item Data Gatherer, Data Manager
+    \end{itemize}
+    \item User Services
+    \begin{itemize}
+        \item Data Acquisition Manager, Sensors API
+        \item Access to Data, Maps API
+    \end{itemize}
+    \item Third Party Services
+    \begin{itemize}
+        \item Group Request Service, Maps API
+        \item Access to Data, Maps API
+    \end{itemize}
+    \clearpage
+    \item Emergency Service
+    \begin{itemize}
+        \item Data Analyzer, Data Manager
+        \item NHS Adapter, NHS API
+    \end{itemize}
+\end{itemize}
+
+\textbf{Integration between Server Components:}
+\begin{itemize}
+    \item Central Controller
+    \begin{itemize}
+        \item Individual Request Manager, Requests Manager (User Services)
+        \item Individual Request Manager, Notification Manager (User Services)
+    \end{itemize}
+    \item User Services
+    \begin{itemize}
+        \item Data Sending Service, Data Gathering (Central Controller)
+        \item Login Service, Account Manager
+        \item Registration Service, Account Manager
+    \end{itemize}
+    \item Third Party Services
+    \begin{itemize}
+        \item Individual Request Service, Individual Request Manager (Central Controller)
+        \item Group Request Service, Group Request Manager (Central Controller)
+        \item Access to Data, Data Provider (Central Controller)
+        \item Login Service, Account Manager
+        \item Registration Service, Account Manager
+    \end{itemize}
+    \item Emergency Service
+    \begin{itemize}
+        \item Data Analyzer, Data Provider (Central Controller)
+        \item Emergency Manager, Account Manager (Central Controller)
+        \item User Communication Manager, Notification Manager (User Services)
+    \end{itemize}
+\end{itemize}
+
+\textbf{Integration of Client Components with Server Components:}
+\begin{itemize}
+    \item User Web, Mobile and Wearable Applications, User Services
+    \item Third Party Web and Mobile Applications, Third Party Services
+\end{itemize}
+
+\clearpage
 \subsection{Integration Testing Strategy}
+According to the development approach of our software, we decided to integrate the components using a mixture of two approaches: the \textbf{Bottom Up} and the \textbf{Critical Module First}.
+
+The \textbf{Bottom Up} approach allows us to test the ready components directly in a real world scenario, without creating some specific stubs. It's important that the external services are available for the integration process from the beginning.\\
+As soon as a component or a part of it has been implemented, even before it has passed the unit test, it can be integrated with the already existing ones which lies in the lower levels of the hierarchy. Using this method we are able to find out the reaction of the system in the real world usage, so that we can promptly intervene if something go wrong.\\
+We also choose this integration approach since it reflects the same approach used during the implementation phase, so that we can optimize the efficiency of the project.
+Components that lies in the same hierarchy level can be integrated in an arbitrary order, maybe integrating the ones that will be ready first.
+
+The Server components represent the core logic of the entire system, so it is necessary to start integrating them from the beginning.
+For this reason we also decided to use the \textbf{Critical Module First} approach to start integrating the riskiest components first.
+Since a fault in these components may have tragic consequences for the entire system, this approach allows us to fix the bugs earlier.
+
+Components provided by external entities, such as \textbf{Maps API}, \textbf{health sensors APIs}, \textbf{NHS API} and \textbf{VoIP API} can be immediately used in the integration since we assume that they are ready before all the others. Also the \textbf{Data Manager} and the \textbf{DBMS} components have to be completed before starting the integration, since the lower level of the hierarchy strongly depends on them.\\
 \subsection{Sequence of Component/Function Integration}
+This section illustrates the plan of the integration between components of our systems. The following diagrams represents a model of the integration order. An arrow going from component X to component Y means that Y is necessary for X functioning, so it must have already been implemented before integration happens.
+
+\subsubsection{Software Integration Sequence}
+\subsubsection{Subsystem Integration Sequence}
