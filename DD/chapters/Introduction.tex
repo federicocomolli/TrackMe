@@ -1,28 +1,16 @@
 \section{Purpose}
-\cite{gps}TrackMe is a company that wants to create a software-based system that allows third parties to monitor the location and health status of individuals. 
-\par This service, which from now on will be referred to as Data4Help, supports the registration of individuals who, by registering, agree to the collection of their data. Data acquisition can occur through smart watches or similar electronic devices.
-\par Third parties can request access to the data of some specific individuals of which they know a form of identification (such as the SSN or the Fiscal Code). In this case, TrackMe forwards the request to the user who can accept or refuse it.
-\par Another service offered to third parties by Data4Help is to access to anonymous data of classes of individuals, grouped by different criteria (for example geographical area, age, gender, etc.). Anonymity is a crucial value for TrackMe, so it approves these requests only if third parties cannot go back to users' identity; for this reason requests referred to groups composed by less than 1000 individuals will be denied.
-\par After a request has been accepted, third parties can subscribe to the reception of updated data as soon as they are produced.
-\par Moreover, in order to exploit the features offered by Data4Help, TrackMe wants to develop a customized SOS service to elderly people. This system, called AutomatedSOS, uses the data collected by Data4Help to monitor the health status of the subscribed users. Through the real time screening, the system is able to react to the variation of the parameters by sending an ambulance to the location of the customer in case of emergency.
-
+The purpose of the Design Document is to give a detailed description of how Data4Help and AutomatedSOS will be designed. This document is addressed to the developer of the system and it aims to identify the high level architecture and to describe the behaviour of its components.
 \section{Scope}
-\subsection{Analysis of the phenomena}
-Data4Help application can be used after the registration through the interface on the electronic devices.
-People who are for different reasons interested in services have to provide their name, surname, gender, birth date, SSN or Fiscal Code.
-\par Users of Data4Help have to wear some kind of electronic devices that record information about their position and their health status.
-Data4Help is an application-to-be that is projected to be installed on different wearable electronic devices (smart-watches, smart-bands, etc.) and eventually can interact with other health tools such as heart rate bands, smart scales or similar.
-\par To identify the health status, Data4Help searches for different parameters provided by sensors on smart-watches or health tools (such as heart rate, skin temperature, blood glucose level, weight, etc.).
-Also, Data4Help acquires the position of its users through GPS technology.
-\newline Data acquired by Data4Help may be matter of interest for third parties that can make a request using the functionality provided by the application. If a request is referred to a single user it's necessary to provide his/her SSN or Fiscal Code. In addition it's possible to request data referred to group of people (associated by age, gender, location, etc.). Data4Help has to accept or decline these requests using a defined privacy criteria.
-\par Users who receive a request for their personal information can accept or decline it using the provided functionality.
-\newline Data4Help offers the possibility to subscribe to data in order to receive the updated ones as soon they are produced.
-\par Furthermore, TrackMe wants to build a new application on top of Data4Help, with the purpose of exploiting its functionality to provide an emergency service.
-As for Data4Help, registration is necessary to use AutomatedSOS.
+Data4Help is an application-to-be that that allows third parties to monitor the location and health status of individuals. It is projected to be installed on different wearable electronic devices (smart-watches, smart-bands, etc.).
+\newline Data4Help collects different parameters provided by sensors on smart-watches or health tools (such as heart rate, skin temperature, blood glucose level, weight, etc.) and also acquires the position of its users through GPS technology.
+\newline Third parties interested in data acquired by Data4Help can make a request using the functionality provided by the application. In addition it's possible to make requests referred to group of people. Data4Help accepts or declines these requests using a defined privacy criteria.
+Users who receive a request for their personal information can respond using the provided functionality.\\
+Furthermore, TrackMe wants to build a new application on top of Data4Help, with the purpose of exploiting its functionality to provide an emergency service.
 \newline AutomatedSOS analyzes real-time data provided by Data4Help technology.
 If the software detects an anomaly in the parameters it notifies an emergency to the Operations Center of the National Health Service within 5 seconds. 
-From now on the National Health Service is responsible for the first aid and it manages the request accordingly to its own protocol.
-The intervention is carried on determining the emergency level and sending an ambulance to the location of the user.
+The intervention is carried on by the NHS that determines the emergency level and sends an ambulance to the location of the user.\\
+In the following pages we will present the design decisions made to achieve all the functionalities that the system has to offer.
+
 
 \section{Definitions, Acronyms, Abbreviations}
 \subsection{Definitions}
@@ -43,12 +31,16 @@ The intervention is carried on determining the emergency level and sending an am
 \subsection{Acronyms}
 \begin{itemize}
     \item RASD: Requirements Analysis and Specification Document. 
+    \item DD: Design Document.
     \item SSN: Social Security Number.
     \item GPS: Global Position System.
     \item API: Application Programming Interface.
     \item NHS: National Health Service.
     \item OC: Operations Center.
-    \item TP: Third Party
+    \item TP: Third Party.
+    \item SOA: Service Oriented Architecture.
+    \item UX: User Experience.
+    \item BCE: Boundary Control Entity.
 \end{itemize}
 
 \subsection{Abbreviation}
@@ -64,16 +56,17 @@ Version 1.0 delivered on date 10/12/2018.
 \section{Reference Documents}
 \begin{itemize}
     \item Specification Document: \say{Mandatory Project Assignment AY 2018-19}. 
-    \item \href{https://ieeexplore.ieee.org/document/6146379} {29148-2011 - ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle processes --Requirements engineering}
+    \item \href{https://ieeexplore.ieee.org/document/5167255} {\underline{1016-2009}} - IEEE Standard for Information Technology, Systems Design, Software Design Descriptions.
+    \item Software Engineering II course slides, AY 2018-19, prof. Di Nitto.
+    \item Software Engineering II projects examples, AY 2017-18 and 2016-17.
 \end{itemize}
 
 \section{Document Structure}
 \begin{enumerate} [label={Section \arabic*}]
-    \item gives an introduction to the problem and describes the purpose of the applications Data4Help and AutomatedSOS and states their goals. The scope of the two applications is defined.
-    \item presents the overall description of the project. The product perspective includes details on the shared phenomena and the domain models. The class diagram describes the domain model used, and the state diagram analyzes the process of the collection and the access to data by third parties. Here the majority of functions of the system are more precisely specified, with respect to the already mentioned goals of the system. In the user characteristics section the types of actors that can use the application are described.
-    \item contains the interfaces provided by the system: user interfaces, hardware interfaces, communication interfaces. The section contains also some scenarios that describe specific usage situations of the applications. Furthermore, the functional requirements are defined by using use cases and sequence diagrams.
-    The non-functional requirements are defined through performance requirements, design constraints and software system attributes.
-    \item includes the Alloy model and the discussion of its purpose. Also, few worlds generated by it are shown.
-    \item shows the effort spent by each group member while working on this project.
+    \item gives an introduction to the problem and describes the purpose of the applications Data4Help and AutomatedSOS. The scope of the two applications is defined.
+    \item gives an Overview of the system and illustrates the main components and their relations. The Component View section deepens the analysis for each subsystem and the Deployment View describes how the system will be implemented in the architectural infrastructure. The Runtime View shows the interaction sequences between the modules. Then, the interfaces provided by the components are showed. Moreover, a description of the main architectural styles and patterns adopted in the design is given.
+    \item presents mockups and further details about the User Interface using UX and BCE diagrams.
+    \item maps functional requirements with the components responsible for their realization and quality requirements with the design decisions made during the development of the system.
+    \item shows the effort spent by each group member while working on this document.
     \item includes the reference documents used to  compose the project analysis.
 \end{enumerate}

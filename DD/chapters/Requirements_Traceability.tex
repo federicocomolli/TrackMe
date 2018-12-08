@@ -115,4 +115,14 @@ Other important diagrams that integrate the following mapping, are in the\\ \hyp
         \end{itemize}
 \end{enumerate}
 
-\section{Non Functional Requirements}
+\section{Quality Requirements}
+To respond to a huge number of \underline{concurrent} transactions is used the load balancing technique.
+Data provided by the users and their access by several third parties could represent a huge amount of transactions that the system must be able to correctly handle.\\
+The \underline{security} of the system is reached through at least four different mechanisms: the proxy, the Account Manager, the encryption of the data and the firewalls.\\
+The proxy is able to detect DDoS attacks and, as a consequence, can disable a user that is overloading the servers.
+This attacks are also prevented by the Account Manager, which guarantees that only the authorized users can interact with the servers.
+All the databases are encrypted to prevent attacks whose purpose is to steal sensitive data from the system.
+Moreover, one of the purpose of the firewalls is to limit the number of ports that are exposed to the public.\\
+The \underline{availability} and the \underline{reliability} of the system are ensured by the n-tier infrastructure. The system is based on several databases distributed on different server farms. The data are stored at least into two different databases so that when a server falls down, there is at least one available copy of them.\\
+The \underline{maintainability} of the system is guaranteed by the Model View Controller design pattern and by the facade pattern. \\
+In order to ensure the \underline{portability} of the core service, the database and the back-end system are development avoiding platform dependent programming languages. For this purpose the system is based on the Service Oriented Architecture.

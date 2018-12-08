@@ -264,7 +264,7 @@ The emergency service provide the methods to collect(AGGIUNGERE AL DIAGRAMMA) an
 
 \clearpage
 
-\section{Selected Architectural Styles and Patterns}
+\hypertarget{Arch_Patt}{\section{Selected Architectural Styles and Patterns}}
 \begin{itemize}
     \item \textbf{Model-View-Controller:} it's a very common design pattern, that separates the architecture into three communicating components. The Controller acts performs actions on the Model, using inputs from the View. The Model contains the application's data structures and the View gives an external representation of them.\\ 
     Using the MVC pattern promotes the code reuse and avoid the coupling between the data and their representation. This pattern is particularly appropriate for complex systems such as Data4Help and AutomatedSOS, that will be deployed in multiple physical nodes and will provide several types of views to their users.  
@@ -280,8 +280,8 @@ The emergency service provide the methods to collect(AGGIUNGERE AL DIAGRAMMA) an
 \section{Other Design Decisions}
 
 \begin{itemize}
-    \item \textbf{Google Maps API:} to represent current positions and daily routes we will use the maps API offered by Google. This API is the common standard because of its quality and current updates. Google Maps offers an interface for JavaScript, Android and iOS development.
-    \item \textbf{Sensors API and healthKit:} to collect data from users' device we will with the API offered by Android and iOS platforms: Sensors API and healthKit.
+    \item \textbf{Google Maps API:} to represent current positions and daily routes we will use the maps API offered by Google. This API is the common standard because of its quality and current updates. Google Maps offers an interface for JavaScript\cite{mapsAPI-JS}, Android\cite{mapsAPI-Android} and iOS\cite{mapsAPI-iOS} development.
+    \item \textbf{Sensors API and healthKit:} to collect data from users' device we will with the API offered by Android and iOS platforms: Sensors API\cite{sensorsAPI} and healthKit\cite{healthKit}.
     \item \textbf{AutomatedSOS and Data4Help integration:} when designing AutomatedSOS, we followed two main guide lines: promoting the code reuse as much as possible and keeping the central logic of the application independent from Data4Help's components.
     Given these objectives, we designed AutomatedSOS as an independent service, built on-top of Data4Help platform. 
     The two apps shares the same account management system, so whenever a user registers to AutomatedSOS he/she is also a Data4Help user.\\
