@@ -282,7 +282,7 @@ The system will perform its communications using the HTTPS and TCP/IP protocols.
             \item [{[D14]}] When  parameters  are  below  certain  thresholds,  it  means  that  the  user actually needs first aid.
             \item [{[D15]}] Operations Center of the NHS is up 24/7.
             \item [{[D16]}] When Operations Center gather a request from AutomatedSOS, it sends at least an ambulance and at least one of them arrives to the location of the emergency.
-            \item [{[D17]}] NHS provides an API that allows third parties to send emergency requests in the form of a instant message received in their platform.
+            \item [{[D17]}] NHS provides an API that allows third parties to send emergency requests in the form of an instant message received in their platform or there is a VoIP API that allows to make automatic calls to the Operations Center phone number.
             \item [{[R22]}] As soon as an anomaly in the parameters is detected, the system must organize the data in a human-readable request for first aid. The form for request must contain these mandatory fields: name, surname, age, gender, SSN or Fiscal Code, latest available position, list of the latest health parameters.
             \item [{[R23]}] AutomatedSOS must send a request for first aid to the Operations Center within 5 seconds from the moment that the emergency is detected.
         \end{itemize}
@@ -656,7 +656,7 @@ The system will be subject to the privacy requirements enforced by the national 
 
 \subsubsection{Interfaces}
     Sensors interact with Data4Help through an apposite API (healthKit for iOS\cite{healthKit}, Sensors API for Android\cite{sensorsAPI}).
-    AutomatedSOS interacts with the Operations Center through an interface provided by the NHS.
+    AutomatedSOS interacts with the Operations Center through an interface provided by the NHS or trough a VoIP API.
     Data4Help uses Google Maps API to show the position of a user on a mobile or web app.
     Google Maps API is also used to transform a position on a map into an address while composing a group request.
 

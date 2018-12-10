@@ -1,12 +1,12 @@
 \section{Purpose}
-The purpose of the Design Document is to give a detailed description of how Data4Help and AutomatedSOS will be designed. This document is addressed to the developer of the system and it aims to identify the high level architecture and to describe the behaviour of its components.
+The purpose of the Design Document is to give a detailed description of how Data4Help and AutomatedSOS are designed. This document is addressed to the developer of the system and aims to identify the high level architecture and to describe the behaviour of its components.
 \section{Scope}
-Data4Help is an application-to-be that that allows third parties to monitor the location and health status of individuals. It is projected to be installed on different wearable electronic devices (smart-watches, smart-bands, etc.).
-\newline Data4Help collects different parameters provided by sensors on smart-watches or health tools (such as heart rate, skin temperature, blood glucose level, weight, etc.) and also acquires the position of its users through GPS technology.
-\newline Third parties interested in data acquired by Data4Help can make a request using the functionality provided by the application. In addition it's possible to make requests referred to group of people. Data4Help accepts or declines these requests using a defined privacy criteria.
+Data4Help is an application-to-be that allows third parties to monitor the location and the health status of its users. It is projected to be installed on different wearable electronic devices (smartphones, smartwatches, smartbands, etc.).\\
+Data4Help collects different parameters provided by sensors on smart-watches or health tools (such as heart rate, skin temperature, blood glucose level, weight, etc.) and also acquires the position of its users through GPS technology.\\
+Third parties interested in data acquired by Data4Help can make a request using the functionality provided by the application. In addition it's possible to make requests referred to group of people. Data4Help accepts or declines these requests using a defined privacy criteria.
 Users who receive a request for their personal information can respond using the provided functionality.\\
-Furthermore, TrackMe wants to build a new application on top of Data4Help, with the purpose of exploiting its functionality to provide an emergency service.
-\newline AutomatedSOS analyzes real-time data provided by Data4Help technology.
+Furthermore, TrackMe wants to build a new application on top of Data4Help, with the purpose of exploiting its functionalities to provide an emergency service.\\
+AutomatedSOS analyzes real-time data, provided by Data4Help technology.
 If the software detects an anomaly in the parameters it notifies an emergency to the Operations Center of the National Health Service within 5 seconds. 
 The intervention is carried on by the NHS that determines the emergency level and sends an ambulance to the location of the user.\\
 In the following pages we will present the design decisions made to achieve all the functionalities that the system has to offer.
@@ -16,7 +16,7 @@ In the following pages we will present the design decisions made to achieve all 
 \subsection{Definitions}
 \begin{itemize}
     \item Users: people who use the services provided by TrackMe.
-    \item Third Parties: entity that are interested to data provided by TrackMe.
+    \item Third Parties: entities that are interested to data provided by TrackMe.
     \item National Health Service: the national institution that provides health care to citizens.
     \item Social Security Number: a nine-digit-number that identifies uniquely a citizen.
     \item Fiscal Code: synonym to Social Security Number for Italian people.
@@ -51,7 +51,9 @@ In the following pages we will present the design decisions made to achieve all 
 \end{itemize}
 
 \section{Revision history}
-Version 1.0 delivered on date 10/12/2018.
+\begin{itemize}
+    \item Version 1.0 delivered on date 10/12/2018.
+\end{itemize}
 
 \section{Reference Documents}
 \begin{itemize}
@@ -64,8 +66,8 @@ Version 1.0 delivered on date 10/12/2018.
 \section{Document Structure}
 \begin{enumerate} [label={Section \arabic*}]
     \item gives an introduction to the problem and describes the purpose of the applications Data4Help and AutomatedSOS. The scope of the two applications is defined.
-    \item gives an Overview of the system and illustrates the main components and their relations. The Component View section deepens the analysis for each subsystem and the Deployment View describes how the system will be implemented in the architectural infrastructure. The Runtime View shows the interaction sequences between the modules. Then, the interfaces provided by the components are showed. Moreover, a description of the main architectural styles and patterns adopted in the design is given.
-    \item presents mockups and further details about the User Interface using UX and BCE diagrams.
+    \item gives an Overview of the system and illustrates the main components and their relations. The Component View section deepens the analysis for each subsystem and the Deployment View describes how the system will be implemented in the architectural infrastructure. The Runtime View shows the interaction sequences between the modules. Then, the Interfaces provided by the components are showed. Moreover, a description of the main Architectural Styles and Patterns adopted in the design is given.
+    \item presents mockups and further details about the User Interfaces using UX and BCE diagrams.
     \item maps functional requirements with the components responsible for their realization and quality requirements with the design decisions made during the development of the system.
     \item shows the effort spent by each group member while working on this document.
     \item includes the reference documents used to  compose the project analysis.

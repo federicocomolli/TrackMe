@@ -1,6 +1,6 @@
 \section{Functional Requirements}
-The design decisions illustrated in this document have been taken with the purpose to satisfy all the functional requirements listed in the RASD document. In this section, each requirement is mapped into the corresponding design components.
-The mapping can be better understood by observing the \hyperlink{RV}{\underline{Runtime view, section 2.5}}, in which is illustrated the sequential order of the interaction between each design component, in order to accomplish the functional requirements.\\
+The design decisions illustrated in this document have been made with the purpose of satisfying all the functional requirements listed in the RASD document. In this section, each requirement is mapped to the corresponding design components.
+The mapping can be better understood by observing the \hyperlink{RV}{\underline{Runtime view, section 2.5}}, in which is illustrated the sequence of the interactions between the design components, in order to accomplish the functional requirements.\\
 Other important diagrams that integrate the following mapping, are in the\\ \hyperlink{CV}{\underline{Component view, section 2.3}}.
 
 \begin{enumerate} [label={\bf[R\arabic*]}]
@@ -16,7 +16,7 @@ Other important diagrams that integrate the following mapping, are in the\\ \hyp
         \end{itemize}
     \item \textbf{The system must acquire real-time users' positions from the GPS installed on the user's device.}
         \begin{itemize}
-            \item GPS API
+            \item Sensors API (GPS API)
             \item User services: Data acquisition service
             \item User services: Data sending service
             \item Central controller: Data gathering
@@ -24,19 +24,21 @@ Other important diagrams that integrate the following mapping, are in the\\ \hyp
     \clearpage
     \item \textbf{The system must collect users' data in specific databases.}
         \begin{itemize}
+            \item Central controller: Data gathering
             \item Central controller: Data provider
             \item Data manager
             \item DBMS
         \end{itemize}
     \item \textbf{The system must acquire real-time users' health parameters from the sensors installed on the user's device.}
         \begin{itemize}
-            \item sensors API
+            \item Sensors API
             \item User services: Data acquisition service
             \item User services: Data sending service
             \item Central controller: Data gathering
         \end{itemize}
     \item \textbf{Every time that a third party inserts a request for data relative to a Fiscal Code, the system must ask the authorization to the corresponding user.}
         \begin{itemize}
+            \item Central Controller: Individual Request Manager
             \item User services: Request manager
             \item Mobile application
         \end{itemize}
@@ -58,7 +60,6 @@ Other important diagrams that integrate the following mapping, are in the\\ \hyp
             \item Third party services: Individual request service
             \item Account manager
             \item Central controller: Individual request manager
-            \item User services: Requests manager
         \end{itemize}
     \item \textbf{The system must provide a function to allow third parties to request the access to data of a group of people. The form must offer some selection criteria such as geographical, time, health parameters, movement habits, ecc.}
         \begin{itemize}
@@ -84,6 +85,7 @@ Other important diagrams that integrate the following mapping, are in the\\ \hyp
         \begin{itemize}
             \item Web application
             \item Mobile application
+             \item Third party services: Access to data
         \end{itemize}
     \item \textbf{The system accepts a request for anonymous data only if the group composing the data is formed by more than 1000 people.}
         \begin{itemize}
@@ -116,13 +118,13 @@ Other important diagrams that integrate the following mapping, are in the\\ \hyp
 \end{enumerate}
 
 \section{Quality Requirements}
-To respond to a huge number of \underline{concurrent} transactions is used the load balancing technique.
+To respond to a huge number of \underline{concurrent} transactions we used the load balancing technique.
 Data provided by the users and their access by several third parties could represent a huge amount of transactions that the system must be able to correctly handle.\\
 The \underline{security} of the system is reached through at least four different mechanisms: the proxy, the Account Manager, the encryption of the data and the firewalls.\\
 The proxy is able to detect DDoS attacks and, as a consequence, can disable a user that is overloading the servers.
 This attacks are also prevented by the Account Manager, which guarantees that only the authorized users can interact with the servers.
-All the databases are encrypted to prevent attacks whose purpose is to steal sensitive data from the system.
+All the databases are encrypted to prevent attacks that aims to steal sensitive data from the system.
 Moreover, one of the purpose of the firewalls is to limit the number of ports that are exposed to the public.\\
-The \underline{availability} and the \underline{reliability} of the system are ensured by the n-tier infrastructure. The system is based on several databases distributed on different server farms. The data are stored at least into two different databases so that when a server falls down, there is at least one available copy of them.\\
-The \underline{maintainability} of the system is guaranteed by the Model View Controller design pattern and by the facade pattern. \\
-In order to ensure the \underline{portability} of the core service, the database and the back-end system are development avoiding platform dependent programming languages. For this purpose the system is based on the Service Oriented Architecture.
+The \underline{availability} and the \underline{reliability} of the system are ensured by the n-tier infrastructure. The system is based on several databases distributed on different data centers. The data are stored at least into two different databases so that when a server falls down, there is at least one available copy of them.\\
+The \underline{maintainability} of the system is guaranteed by the Model View Controller design pattern and by the Facade pattern. \\
+In order to ensure the \underline{portability} of the core service, the database and the back-end system are developed avoiding platform dependent programming languages. For this purpose the system is based on the Service Oriented Architecture.
