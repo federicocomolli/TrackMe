@@ -102,6 +102,18 @@ The two systems share the same Account Manager, so every user that registers to 
     \item \textbf{User Communication manager}: this module is responsible for the communication between AutomatedSOS and the user. If the user is having a health emergency, the Communication Manager notifies him about the ambulance arrival.
 \end{itemize}
 \clearpage
+\subsubsection{Entity Relationship Diagram}
+This section gives an high level representation of the Model of the system.
+The following Entity Relationship diagram illustrates how the main data structures are organized and how they relate to each other.\\
+This model should not be intended as an implementation of the central database, but as a general description of how the system manages the data.\\
+\vspace{60pt}
+\begin{figure}[ht]
+    \makebox[\textwidth]{
+        \includegraphics[width=1.4\linewidth]{images/ER_Diagram.png}
+    }
+    \caption{Entity Relationship Diagram.}
+\end{figure}
+\clearpage
 \section{Deployment	View}
 In this section we illustrate the deployment of the system components on the hardware infrastructure.
 The design of the hardware architecture was made keeping in mind the non-functional requirements illustrated in the RASD document. The objective was to obtain a reliable and scalable system, but also to avoid an over-complicated disposition, that would increase the costs of construction and maintenance. \\
