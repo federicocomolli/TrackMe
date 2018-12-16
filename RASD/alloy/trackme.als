@@ -35,13 +35,13 @@ sig SkinTemperature extends HealthParameter {}
 
 sig GlucoseLevel extends HealthParameter {}
 
-sig Data {
+sig AnonymizedData {
 	timeStamp: one Time,
 	position: one Position,
 	healthParameters: some HealthParameter
 }
 
-sig UserData extends Data {
+sig UserData extends AnonymizedData {
 	user: one User,
 	requests: set IndividualRequest
 }
@@ -64,7 +64,7 @@ sig GroupRequest extends Request {
 
 sig GroupData {
 	timeStamp: one Time,
-	data: some Data,
+	data: some AnonymizedData,
 	criteria: some Criterion,
 	requests: set GroupRequest
 }
@@ -98,7 +98,7 @@ fact equalsPositions {
 
 fact NoDuplicateTimeData {
 	no disjoint ud1, ud2: UserData | ud1.user = ud2.user and ud1.timeStamp = ud2.timeStamp
-	--all the data collected from a user at a specific time are contained in one UserData
+	--all the AnonymizedData collected from a user at a specific time are contained in one UserData
 }
 
 fact RequestState {
@@ -127,22 +127,22 @@ pred createIndividualRequest [r: IndividualRequest, tp: ThirdParty, u: Monitored
 		r.subscription.t = False
 }
 
---Request a subscription to the requested data 
+--Request a subscription to the requested AnonymizedData 
 pred requestSubscription [tp: ThirdParty, r: Request, t: Time] {
 	r.authorization.t = False
 	r.subscription.t = True
 }
 
---Accept a request for personal data
+--Accept a request for personal AnonymizedData
 pred acceptIndividualRequest [u: User, r: IndividualRequest, t: Time] {
 	//postconditions
 	r.authorization.t = True		--the request is authorized
 	r.subscription.t = False implies		--if the third party did not requested the subscription
 			(one d: UserData | d.user = u and r in d.requests and gte[d.timeStamp, t])
-			--the third party will be able to access only one packet of data generated after the time of the authorization
+			--the third party will be able to access only one packet of AnonymizedData generated after the time of the authorization
 		else
 			(all d: UserData | d.user = u and gte[d.timeStamp, t] implies (r in d.requests))
-			--the third party will be able to access all the user's data generated after the authorization
+			--the third party will be able to access all the user's AnonymizedData generated after the authorization
 }
 
 
@@ -151,28 +151,28 @@ pred acceptIndividualRequest [u: User, r: IndividualRequest, t: Time] {
 pred isPrivacyRespected [g: GroupData] {
 	//postconditions
 	gt[#g.data.user, 2]
-	--due to the alloy language constraints, the limit of 1000 different people composing a group of data has been reduced to a symbolic 2 people
+	--due to the alloy language constraints, the limit of 1000 different people composing a group of AnonymizedData has been reduced to a symbolic 2 people
 }
 
---Accept a request for group data
+--Accept a request for group AnonymizedData
 pred acceptGroupRequest [r: GroupRequest, t: Time] {
 	//postconditions
 	r.authorization.t = True		--the request is authorized
 	r.subscription.t = False implies		--if the third party did not requested the subscription
 		(one g: GroupData | isPrivacyRespected[g] and r in g.requests)
-		--the third party will be able to access only one packet of data generated after the time of the authorization
+		--the third party will be able to access only one packet of AnonymizedData generated after the time of the authorization
 	else
 		(all g: GroupData | g.criteria = r.criteria and gte[g.timeStamp, t] implies (r in g.requests))
-		--the third party will be able to access all the group data following the requested criteria generated after the authorization 	
+		--the third party will be able to access all the group AnonymizedData following the requested criteria generated after the authorization 	
 }
 
---Refuse a request for personal data
+--Refuse a request for personal AnonymizedData
 pred refuseIndividualRequest [r: IndividualRequest, t: Time] {
 	//postconditions
 	r.authorization.t = False	--the request is rejected
 	r.subscription.t = False		--the subscription is rejected
 	no d: UserData | d.fiscalCode = r.fiscalCode and r in d.requests
-	--there isn't any data associated with the specific user accessible by this request
+	--there isn't any AnonymizedData associated with the specific user accessible by this request
 }
 
 --AutomatedSOS generates an emergcy
@@ -184,7 +184,7 @@ pred generateEmergency {
 		iff
 		one em: EmergencyMessage, oc: OperationsCenter | 
 				em.userData = d and (em in oc.messages) and lte[em.timeStamp, d.timeStamp + 5]
-		--an emergency message containing the user's data is generated and is sent to an Operations Center within 5 seconds from the anomaly
+		--an emergency message containing the user's AnonymizedData is generated and is sent to an Operations Center within 5 seconds from the anomaly
 }
 
 pred show {
